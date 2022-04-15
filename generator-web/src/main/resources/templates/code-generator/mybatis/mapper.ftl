@@ -47,13 +47,13 @@ public interface ${classInfo.className}Mapper {
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    List<${classInfo.className}> pageList(int offset,int pageSize);
+    List<${classInfo.className}> pageList(int offset,int pagesize);
 
     /**
     * 查询 分页查询 count
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    int pageListCount(int offset,int pageSize);
+    int pageListCount(int offset,int pagesize);
 
 }

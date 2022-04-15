@@ -4,7 +4,6 @@
 <mapper namespace="${packageName}.dao.${classInfo.className}Mapper">
 
     <resultMap id="BaseResultMap" type="${packageName}.entity.${classInfo.className}" >
-        <result column="id" property="id" />
         <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
             <#list classInfo.fieldList as fieldItem >
                 <result column="${fieldItem.columnName}" property="${fieldItem.fieldName}" />
@@ -13,7 +12,6 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,
         <#if classInfo.fieldList?exists && classInfo.fieldList?size gt 0>
             <#list classInfo.fieldList as fieldItem >
                 ${fieldItem.columnName}<#if fieldItem_has_next>,</#if>

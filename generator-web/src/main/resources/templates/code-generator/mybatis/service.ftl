@@ -28,14 +28,9 @@ public interface ${classInfo.className}Service {
     */
     public ${classInfo.className} load(int id);
 
-/**
-* 如果已经有这个id的，就更新，不然是插入
-*/
-Object save(${classInfo.className} ${classInfo.className?uncap_first});
-
     /**
     * 分页查询
     */
-    public Map<String,Object> pageList(int offset, int pageSize);
+    public Map<String,Object> pageList(int offset, int pagesize);
 
 }

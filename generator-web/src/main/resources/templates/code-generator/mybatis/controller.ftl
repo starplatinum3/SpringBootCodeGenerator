@@ -15,7 +15,6 @@ import java.util.Map;
  * @author ${authorName}
  * @date ${.now?string('yyyy-MM-dd')}
  */
-@CrossOrigin
 @RestController
 @RequestMapping(value = "/${classInfo.className?uncap_first}")
 public class ${classInfo.className}Controller {
@@ -23,22 +22,12 @@ public class ${classInfo.className}Controller {
     @Resource
     private ${classInfo.className}Service ${classInfo.className?uncap_first}Service;
 
-/**
-* id 存在就更新 不然插入
-* @param ${classInfo.className?uncap_first}
-* @return
-*/
-@PostMapping("/save")
-public Object save(@RequestBody  ${classInfo.className} ${classInfo.className?uncap_first}){
-return ${classInfo.className?uncap_first}Service.save(${classInfo.className?uncap_first});
-}
-
     /**
     * 新增
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    @PostMapping("/insert")
+    @RequestMapping("/insert")
     public Object insert(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.insert(${classInfo.className?uncap_first});
     }
@@ -48,7 +37,7 @@ return ${classInfo.className?uncap_first}Service.save(${classInfo.className?unca
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    @PostMapping("/delete")
+    @RequestMapping("/delete")
     public Object delete(int id){
         return ${classInfo.className?uncap_first}Service.delete(id);
     }
@@ -58,7 +47,7 @@ return ${classInfo.className?uncap_first}Service.save(${classInfo.className?unca
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    @PostMapping("/update")
+    @RequestMapping("/update")
     public Object update(${classInfo.className} ${classInfo.className?uncap_first}){
         return ${classInfo.className?uncap_first}Service.update(${classInfo.className?uncap_first});
     }
@@ -68,7 +57,7 @@ return ${classInfo.className?uncap_first}Service.save(${classInfo.className?unca
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    @PostMapping("/load")
+    @RequestMapping("/load")
     public Object load(int id){
         return ${classInfo.className?uncap_first}Service.load(id);
     }
@@ -78,12 +67,10 @@ return ${classInfo.className?uncap_first}Service.save(${classInfo.className?unca
     * @author ${authorName}
     * @date ${.now?string('yyyy/MM/dd')}
     **/
-    @PostMapping("/list")
-    public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int pageNumber,
-                                        @RequestParam(required = false, defaultValue = "10") int pageSize) {
-        return ${classInfo.className?uncap_first}Service.pageList(pageNumber, pageSize);
-        //Map<String, Object> pageList = ${classInfo.className?uncap_first}Service.pageList(pageNumber, pageSize);
-//return ReturnT.success(pageList);
+    @RequestMapping("/pageList")
+    public Map<String, Object> pageList(@RequestParam(required = false, defaultValue = "0") int offset,
+                                        @RequestParam(required = false, defaultValue = "10") int pagesize) {
+        return ${classInfo.className?uncap_first}Service.pageList(offset, pagesize);
     }
 
 }

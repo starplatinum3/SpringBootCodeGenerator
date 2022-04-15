@@ -32,7 +32,7 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 
 
 	@Override
-	public Object delete(Integer id) {
+	public Object delete(int id) {
 		int ret = ${classInfo.className?uncap_first}Mapper.delete(id);
 		return ret>0?${returnUtilSuccess}():${returnUtilFailure}();
 	}
@@ -46,38 +46,20 @@ public class ${classInfo.className}ServiceImpl implements ${classInfo.className}
 
 
 	@Override
-	public ${classInfo.className} getById(Integer id) {
-		return ${classInfo.className?uncap_first}Mapper.getById(id);
+	public ${classInfo.className} load(int id) {
+		return ${classInfo.className?uncap_first}Mapper.load(id);
 	}
-
-@Override
-public Object save(${classInfo.className} ${classInfo.className?uncap_first}) {
-Integer id = ${classInfo.className?uncap_first}.getId();
-if (id==null) {
-int insert = ${classInfo.className?uncap_first}Mapper.insert(${classInfo.className?uncap_first});
-return ReturnT.success();
-}
-${classInfo.className} load = ${classInfo.className?uncap_first}Mapper.getById(${classInfo.className?uncap_first}.getId());
-if (load==null) {
-int insert = ${classInfo.className?uncap_first}Mapper.insert(${classInfo.className?uncap_first});
-
-return ReturnT.success();
-}
-${classInfo.className?uncap_first}Mapper.update(${classInfo.className?uncap_first});
-return  ReturnT.success();
-}
 
 
 	@Override
-	public Map<String,Object> pageList(int offset, int pageSize) {
+	public Map<String,Object> pageList(int offset, int pagesize) {
 
-		List<${classInfo.className}> pageList = ${classInfo.className?uncap_first}Mapper.pageList(offset, pageSize);
-Integer totalCount = ${classInfo.className?uncap_first}Mapper.pageListCount(offset, pageSize);
+		List<${classInfo.className}> pageList = ${classInfo.className?uncap_first}Mapper.pageList(offset, pagesize);
+		int totalCount = ${classInfo.className?uncap_first}Mapper.pageListCount(offset, pagesize);
 
 		// result
 		Map<String, Object> result = new HashMap<String, Object>();
-		//result.put("pageList", pageList);
-		result.put("content", pageList);
+		result.put("pageList", pageList);
 		result.put("totalCount", totalCount);
 
 		return result;

@@ -46,6 +46,8 @@ public class TableParseUtil {
         //deal with java string copy \n"
         tableSql = tableSql.trim().replaceAll("\\\\n`", "").replaceAll("\\+", "").replaceAll("``", "`").replaceAll("\\\\", "");
         // table Name
+        System.out.println("tableSql");
+        System.out.println(tableSql);
         String tableName = null;
         if (tableSql.contains("TABLE") && tableSql.contains("(")) {
             tableName = tableSql.substring(tableSql.indexOf("TABLE") + 5, tableSql.indexOf("("));
@@ -110,6 +112,8 @@ public class TableParseUtil {
 
         // 正常( ) 内的一定是字段相关的定义。
         String fieldListTmp = tableSql.substring(tableSql.indexOf("(") + 1, tableSql.lastIndexOf(")"));
+        System.out.println("fieldListTmp");
+        System.out.println(fieldListTmp);
 
         // 匹配 comment，替换备注里的小逗号, 防止不小心被当成切割符号切割
         String commentPattenStr1 = "comment `(.*?)\\`";
@@ -149,6 +153,7 @@ public class TableParseUtil {
         if (fieldLineList.length > 0) {
             int i = 0;
             //i为了解决primary key关键字出现的地方，出现在前3行，一般和id有关
+//            为什么id 不要呢，这里看起来把id略过了，还是说前后端传值的时候不用传id的吗
             for (String columnLine : fieldLineList) {
                 i++;
                 columnLine = columnLine.replaceAll("\n", "").replaceAll("\t", "").trim();
@@ -164,7 +169,10 @@ public class TableParseUtil {
                         && !columnLine.contains("pctincrease")
                         && !columnLine.contains("buffer_pool") && !columnLine.contains("tablespace")
                         && !(columnLine.contains("primary ") && i > 3));
-                if (specialFlag) {
+//                if (columnLine.contains("id")) {
+//
+//                }
+                if (specialFlag||columnLine.contains("id")) {
                     //如果是oracle的number(x,x)，可能出现最后分割残留的,x)，这里做排除处理
                     if (columnLine.length() < 5) {
                         continue;

@@ -249,5 +249,44 @@
         "description": "jpacontroller"
       }
     ]
+  },
+  {
+    "group": "mybatis-starp",
+    "templates": [{
+      "id": "110",
+      "name": "controller-starp",
+      "description": "controller"
+    },
+      {
+        "id": "111",
+        "name": "service-starp",
+        "description": "service"
+      },
+      {
+        "id": "112",
+        "name": "service_impl-starp",
+        "description": "service_impl"
+      },
+      {
+        "id": "113",
+        "name": "mapper-starp",
+        "description": "mapper"
+      },
+      {
+        "id": "114",
+        "name": "mybatis-starp",
+        "description": "mybatis"
+      },
+      {
+        "id": "115",
+        "name": "model-starp",
+        "description": "model"
+      },
+      {
+        "id": "116",
+        "name": "annotation-mapper-starp",
+        "description": "mapper annotation"
+      }
+    ]
   }
 ]

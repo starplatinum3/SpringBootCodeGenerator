@@ -10,10 +10,12 @@ import com.softdev.system.generator.util.ValueUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Map;
 
@@ -49,6 +51,10 @@ public class GeneratorController {
         String templates = generatorService.getTemplateConfig();
         return ReturnT.ok().put("templates",templates);
     }
+
+    @Value("${file.path}")
+    public String filePathStr;
+
     @PostMapping("/code/generate")
     @ResponseBody
     public ReturnT generateCode(@RequestBody ParamInfo paramInfo) throws Exception {
@@ -78,6 +84,14 @@ public class GeneratorController {
 
         paramInfo.getOptions().put("classInfo", classInfo);
         paramInfo.getOptions().put("tableName", classInfo == null ? System.currentTimeMillis() : classInfo.getTableName());
+
+        String tableName = classInfo.getTableName();
+//        filePath
+        File filePath = new File(filePathStr);
+        log.info("filePath {}",filePath);
+        if (!filePath.exists() && !filePath.isDirectory()) {
+            filePath.mkdir();
+        }
 
         //log the generated table and filed size记录解析了什么表，有多少个字段
         //log.info("generated table :{} , size :{}",classInfo.getTableName(),(classInfo.getFieldList() == null ? "" : classInfo.getFieldList().size()));

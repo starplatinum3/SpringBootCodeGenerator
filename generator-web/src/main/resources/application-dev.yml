@@ -60,3 +60,6 @@ OEM:
   returnUtilFailure: ReturnT.error
   outputStr: zhengkai.blog.csdn.net
   mode: local
+
+file:
+  path: D:/genCodeFile
